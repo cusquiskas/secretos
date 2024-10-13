@@ -1,0 +1,6 @@
+# Evitar la exploración de directorios
+Options -Indexes
+
+# Redirigir todas las peticiones a start.php
+RewriteEngine On
+RewriteRule ^(.*)$ start.php [L,QSA]
