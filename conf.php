@@ -3,9 +3,9 @@
 class ConfiguracionSistema
 {
     private $host = 'localhost';
-    private $user = 'confesor';
+    private $user = 'u164639268_confesor';
     private $pass = 'xE.aJejbW/5ky(Dk';
-    private $apli = 'secretos';
+    private $apli = 'u164639268_secretos';
 
     private $home = '/opt/lampp/htdocs/secretos/';
 
