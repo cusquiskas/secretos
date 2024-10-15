@@ -5,13 +5,14 @@
     require_once "controller.php";
     
     header('Content-Type: application/json');
-/*
+    http_response_code(200);
+
     $peticion = new claseRuteo();
     
     if ($peticion->getError()) {
         unset($peticion);
-        http_response_code(501);
-        die ('{"cod":501, "txt":"No way for you"}');
+        http_response_code(404);
+        die ('{"cod":404, "txt":"No way for you"}');
     }
     $llave = $peticion->getLlave();
     unset($peticion);
@@ -22,8 +23,8 @@
     $host = $HOST->getArray();
     unset($HOST);
     if (count($host) != 1) {
-        http_response_code(501);
-        die ('{"cod":501, "txt":"No way for you"}');
+        http_response_code(404);
+        die ('{"cod":404, "txt":"No way for you"}');
     }
     $host = $host[0];
     
@@ -33,25 +34,15 @@
     $secreto = $SECRETO->getArray();
     unset($SECRETO);
     
-
-    echo json_encode($secreto);
- */
+    if (count($secreto) == 0) {
+        http_response_code(404);
+        die ('{"cod":404, "txt":"No way for you"}');
+    }
+    $host = [];
+    for ($i = 0; $i < count($secreto); $i++) {
+        $host[$secreto[$i]["sec_clave"]] = $secreto[$i]["sec_valor"];
+    }
+    
+    echo json_encode($host);
  
- $clave = json_decode(file_get_contents('/opt/lampp/claves.json'), true);
- $clave = $clave["comunidad"];
- 
- $url = "https://cusquiskas.com/secretos";
- $options = array(
-     'http' => array(
-         'method'  => 'GET',
-         'header'  => "Authorization: Bearer $clave\r\n" .
-         "Content-Type: application/json\r\n"
-     )
- );
- $context = stream_context_create($options);
- 
- $config  = json_decode(file_get_contents($url, false, $context), true);
-
- echo var_export($config, true);
-
 ?>
