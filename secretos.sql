@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 13-10-2024 a las 22:39:29
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 15-10-2024 a las 19:42:14
+-- Versión del servidor: 10.11.9-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `GRUPO` (
   `gru_id` int(11) NOT NULL,
   `gru_nombre` varchar(9999) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `GRUPO`
+--
+
+INSERT INTO `GRUPO` (`gru_id`, `gru_nombre`) VALUES
+(1, 'comunidad');
 
 -- --------------------------------------------------------
 
@@ -39,11 +46,10 @@ CREATE TABLE `GRUPO` (
 --
 
 CREATE TABLE `HOST` (
-  `hos_id` int(11) NOT NULL,
-  `hos_nombre` varchar(999) NOT NULL,
-  `hos_host` varchar(999) NOT NULL,
+  `hos_llave` varchar(512) NOT NULL,
+  `hos_ip` varchar(999) NOT NULL,
   `hos_idGrupo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -56,7 +62,8 @@ CREATE TABLE `SECRETO` (
   `sec_clave` varchar(999) NOT NULL,
   `sec_valor` varchar(999) NOT NULL,
   `sec_idGrupo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Índices para tablas volcadas
@@ -72,7 +79,7 @@ ALTER TABLE `GRUPO`
 -- Indices de la tabla `HOST`
 --
 ALTER TABLE `HOST`
-  ADD PRIMARY KEY (`hos_id`),
+  ADD PRIMARY KEY (`hos_llave`),
   ADD KEY `gru_hos_fk` (`hos_idGrupo`);
 
 --
@@ -90,19 +97,13 @@ ALTER TABLE `SECRETO`
 -- AUTO_INCREMENT de la tabla `GRUPO`
 --
 ALTER TABLE `GRUPO`
-  MODIFY `gru_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `HOST`
---
-ALTER TABLE `HOST`
-  MODIFY `hos_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gru_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `SECRETO`
 --
 ALTER TABLE `SECRETO`
-  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas
